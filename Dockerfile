@@ -32,5 +32,6 @@ RUN apt -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update 
     make \
     python3 \
     srecord \
-    binutils
+    binutils \
+    moreutils
 WORKDIR /root
