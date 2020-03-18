@@ -1,7 +1,7 @@
 FROM ubuntu:18.04 as build-gcc6809
 
 # Install what's needed to build gcc6809
-RUN apt update \
+RUN apt -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update \
  && apt install -y --no-install-recommends \
     binutils \
     ca-certificates \
@@ -26,10 +26,11 @@ RUN git clone https://gitlab.com/dfffffff/gcc6809.git \
 # gcc6809 is installed to /usr/local.
 FROM ubuntu:18.04
 COPY --from=build-gcc6809 /usr/local /usr/local
-RUN apt update \
+RUN apt -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update \
  && apt install -y --no-install-recommends \
     libmpfr-dev \
     make \
     python3 \
-    srecord
+    srecord \
+    binutils
 WORKDIR /root
